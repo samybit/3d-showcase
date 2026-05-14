@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import BackgroundText from "@/components/BackgroundText";
 import FramerScene from "@/components/FramerScene";
+import ThreeScene from "@/components/ThreeScene";
 
 export default function Home() {
   return (
@@ -21,8 +22,8 @@ export default function Home() {
             </p>
             <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-primary">
               <li>No WebGL required</li>
-              <li>Native DOM elements (buttons, text) remain selectable</li>
-              <li>hardware-accelerated CSS rendering</li>
+              <li>Native DOM elements remain selectable</li>
+              <li>Hardware-accelerated CSS rendering</li>
             </ul>
           </div>
 
@@ -32,12 +33,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Phase 3: Three.js Section (Placeholder) */}
-      <section id="threejs" className="relative min-h-screen flex items-center justify-center border-t border-white/10 bg-base-300">
+      {/* Phase 3: Three.js Section */}
+      <section id="threejs" className="relative min-h-screen flex items-center justify-center border-t border-white/10 bg-base-300 overflow-hidden">
         <BackgroundText text="REACT THREE FIBER" />
-        <div className="relative z-10">
-          <h2 className="text-4xl font-bold text-center">Native WebGL</h2>
-          <p className="text-center opacity-50 mt-4">[Three.js Scene will go here]</p>
+        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
+
+          {/* Canvas on the left for zig-zag layout */}
+          <div className="h-[600px] w-full flex items-center justify-center order-2 lg:order-1">
+            <ThreeScene />
+          </div>
+
+          <div className="text-left space-y-6 order-1 lg:order-2">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">NATIVE <br /><span className="text-secondary">WEBGL</span></h2>
+            <p className="text-xl opacity-70 max-w-md">
+              Grab and drag the object. This is a WebGL canvas rendering a complex mathematical geometry (Torus Knot) in real-time. The material calculates actual light refraction, chromatic aberration, and thickness.
+            </p>
+            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-secondary">
+              <li>Full WebGL pipeline via Three.js</li>
+              <li>Real-time lighting and environment reflections</li>
+              <li>High-performance geometry rendering</li>
+            </ul>
+          </div>
+
         </div>
       </section>
 
