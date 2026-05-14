@@ -6,6 +6,7 @@ import FramerScene from "@/components/FramerScene";
 import ThreeScene from "@/components/ThreeScene";
 import SplineScene from "@/components/SplineScene";
 import GlobeScene from "@/components/GlobeScene";
+import AtroposScene from "@/components/AtroposScene";
 
 export default function Home() {
   return (
@@ -73,17 +74,33 @@ export default function Home() {
             <p className="text-xl opacity-70 max-w-md">
               Spin the earth. When dealing with 3D data visualization, specialized libraries like Globe.gl map geographical coordinates to WebGL geometry, allowing thousands of animated data points to render effortlessly.
             </p>
-            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-info">
-              <li>Lat/Lng coordinate mapping to 3D space</li>
-              <li>Animated flight paths and data arcs</li>
-              <li>High-performance data rendering</li>
-            </ul>
           </div>
         </div>
       </section>
 
-      {/* Phase 6 & 7 Placeholders */}
-      <section id="atropos" className="relative min-h-screen border-t border-white/10 hidden"></section>
+      {/* Phase 6: Atropos Section */}
+      <section id="atropos" className="relative min-h-screen flex items-center justify-center border-t border-white/10 overflow-hidden">
+        <BackgroundText text="ATROPOS PARALLAX" />
+        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
+          <div className="text-left space-y-6">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">MICRO <br /><span className="text-warning">INTERACTIONS</span></h2>
+            <p className="text-xl opacity-70 max-w-md">
+              Hover over the data slab. Atropos creates stunning, multi-layered holographic parallax effects. It excels at adding extreme depth to UI cards and heroic imagery without the heavy overhead of a full 3D engine.
+            </p>
+            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-warning">
+              <li>Hardware-accelerated CSS transformations</li>
+              <li>Touch and gyro-sensor support for mobile</li>
+              <li>Built-in highlight and shadow engine</li>
+            </ul>
+          </div>
+
+          <div className="h-[600px] w-full flex items-center justify-center">
+            <AtroposScene />
+          </div>
+        </div>
+      </section>
+
+      {/* Phase 7 Placeholder */}
       <section id="css3d" className="relative min-h-screen border-t border-white/10 hidden"></section>
     </main>
   );
