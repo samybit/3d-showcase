@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import BackgroundText from "@/components/BackgroundText";
 import FramerScene from "@/components/FramerScene";
 import ThreeScene from "@/components/ThreeScene";
+import SplineScene from "@/components/SplineScene";
 
 export default function Home() {
   return (
@@ -58,12 +59,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Phase 4: Spline Section (Placeholder) */}
-      <section id="spline" className="relative min-h-screen flex items-center justify-center border-t border-white/10">
+      {/* Phase 4: Spline Section */}
+      <section id="spline" className="relative min-h-screen flex items-center justify-center border-t border-white/10 overflow-hidden pb-20">
         <BackgroundText text="SPLINE DESIGN" />
-        <div className="relative z-10">
-          <h2 className="text-4xl font-bold text-center">Interactive Spline Scene</h2>
-          <p className="text-center opacity-50 mt-4">[Spline Object will go here]</p>
+        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
+
+          <div className="text-left space-y-6">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">VISUAL <br /><span className="text-accent">EDITOR</span></h2>
+            <p className="text-xl opacity-70 max-w-md">
+              Interact with the keyboard. Spline provides a visual 3D modeling environment that exports directly into React components. It abstracts away the complex math of Three.js into a designer-friendly interface.
+            </p>
+            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-accent">
+              <li>Visual editing and animation</li>
+              <li>Built-in interactivity and states</li>
+              <li>Easy iframe or React component export</li>
+            </ul>
+
+            <div className="pt-6">
+              <a href="https://spline.design" target="_blank" rel="noreferrer" className="btn btn-accent btn-outline rounded-full">
+                Build Your Own Scene
+              </a>
+            </div>
+          </div>
+
+          <div className="h-[600px] w-full flex items-center justify-center p-4">
+            <SplineScene />
+          </div>
+
         </div>
       </section>
     </main>
