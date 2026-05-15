@@ -1,6 +1,6 @@
 # DIMENSIONS UNLEASHED: 3D Web Showcase
 
-A vertical storytelling web experience exploring six distinct approaches to rendering the third dimension in the browser. 
+A vertical storytelling web experience exploring seven distinct approaches to rendering the third dimension in the browser. 
 
 This project serves as both a visual showcase and a technical reference for implementing different 3D libraries and techniques within a modern React framework.
 
@@ -10,7 +10,7 @@ This project serves as both a visual showcase and a technical reference for impl
 * **Styling:** Tailwind CSS v4 + DaisyUI v5.0 (Dark/Black theme primary)
 * **Language:** TypeScript
 
-## 🚀 The 6 Phases (Implemented Sections)
+## 🚀 The 8 Phases (Implemented Sections)
 
 The page is structured as a single continuous scroll, featuring an alternating "zebra stripe" high-contrast background (Black and off-white/5% opacity).
 
@@ -18,6 +18,7 @@ The page is structured as a single continuous scroll, featuring an alternating "
     * Dual-overlay fixed Navbar utilizing `mix-blend-difference` for smart color inversion over scrolling backgrounds.
     * Responsive mobile dropdown menu.
     * Reusable `BackgroundText` utility component for massive, subtle background typography.
+    * Interactive volumetric ink-smoke particle effect integrated directly via `@tsparticles/engine`.
 2.  **Phase 2: Framer Motion (DOM Physics)**
     * Raw HTML manipulated in 3D space using native `z` props and Framer Motion's physics engine (`rotateX`, `rotateY`).
     * Features a 3D intersecting gyroscope and dynamic light glare that reacts to mouse coordinates.
@@ -39,6 +40,10 @@ The page is structured as a single continuous scroll, featuring an alternating "
 7.  **Phase 7: Pure Modern CSS (Native Browser Math)**
     * A 3D Lissajous knot built with zero JavaScript physics.
     * Relies entirely on native CSS trigonometric functions (`sin()` and `cos()`) inside `calc()` combined with hardware-accelerated `translate3d`.
+8.  **Phase 8: tsParticles (2D-to-3D Illusion)**
+    * A "Quantum Constellation" utilizing the `@tsparticles/engine`.
+    * Demonstrates how 2D canvas rendering can simulate 3D depth using mathematical parallax and interactive pointer tethering.
+    * Bypasses the standard React wrapper for strict Turbopack compatibility.
 
 ## ⚡ Performance Optimizations & Technical Decisions
 
@@ -51,6 +56,7 @@ We encountered and resolved several critical performance bottlenecks and configu
 * **Touch Action Fixes:** Added `style={{ touchAction: 'none' }}` directly to the innermost `<Canvas>` elements to satisfy the `@use-gesture` library and prevent touch-scrolling conflicts on mobile devices.
 * **Framer Motion Type Safety:** Replaced unnecessary `<motion.div>` elements with standard `<div>` elements for static depth layers to optimize performance and resolve `Transform | undefined` TypeScript errors.
 * **CSS Custom Property Types:** Used bracket notation `['--index' as any]` in React style props to pass custom CSS variables to our Pure CSS 3D scene without breaking standard `CSSProperties` type checking.
+* **tsParticles Turbopack Compliance:** The `@tsparticles/react` wrapper triggers strict static export errors in Next.js 16 Turbopack environments. We circumvented this by importing the core `tsParticles` engine and handling canvas injection natively.
 
 ## ⚠️ Known Quirks (Safe to Ignore)
 

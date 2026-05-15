@@ -8,13 +8,13 @@ export default function Navbar() {
       <li><a href="#globe">Globe.gl</a></li>
       <li><a href="#atropos">Atropos</a></li>
       <li><a href="#css3d">Pure CSS</a></li>
+      <li><a href="#tsparticles">Particles</a></li>
     </>
   );
 
   return (
     <>
       {/* LAYER 1: The Inverting Layer (mix-blend-difference) */}
-      {/* Changed md:px-0 to px-6 md:px-12 for proper edge spacing */}
       <div className="navbar fixed top-0 z-40 w-full px-3 md:px-6 mix-blend-difference text-white">
         <div className="flex-1">
           <a href="#" className="btn btn-ghost text-xl tracking-widest font-bold hover:bg-transparent">
@@ -43,7 +43,6 @@ export default function Navbar() {
       </div>
 
       {/* LAYER 2: The Color Text Layer (Ignores blend, ignores clicks) */}
-      {/* Matched padding here (px-6 md:px-12) to keep the layers perfectly stacked */}
       <div className="navbar fixed top-0 z-50 w-full px-3 md:px-6 pointer-events-none">
         <div className="flex-1">
           <a href="#" className="btn btn-ghost text-xl tracking-widest font-bold hover:bg-transparent">

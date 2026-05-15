@@ -19,7 +19,7 @@ export default function Hero() {
 
         {/* Explicitly dark gray text for the paragraph */}
         <p className="text-lg md:text-xl text-black/70 max-w-2xl mx-auto mb-12 font-medium tracking-wide">
-          Scroll down to explore three unique approaches to rendering the third dimension in the browser.
+          Scroll down to explore seven unique approaches to rendering the third dimension in the browser.
         </p>
 
         {/* The Button Wrapper with the Smoke Effect */}

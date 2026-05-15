@@ -9,10 +9,9 @@ import SplineScene from "@/components/SplineScene";
 import GlobeScene from "@/components/GlobeScene";
 import AtroposScene from "@/components/AtroposScene";
 import PureCSSScene from "@/components/PureCSSScene";
+import ParticlesScene from "@/components/ParticlesScene";
 
 import LazyScene from "@/components/LazyScene";
-
-
 
 export default function Home() {
   return (
@@ -67,21 +66,17 @@ export default function Home() {
       {/* Phase 4: Spline Section (Responsive Full Bleed) */}
       <section
         id="spline"
-        // 1. Mobile: Align to top with padding. Desktop: Center perfectly.
         className="relative min-h-screen flex items-start pt-28 md:pt-0 md:items-center border-t border-white/10 overflow-hidden bg-black"
       >
         <BackgroundText text="SPLINE DESIGN" />
 
-        {/* 2. Mobile: No translation (center). Desktop: Push 25% to the right. */}
         <div className="absolute inset-0 z-0 md:translate-x-1/4">
           <LazyScene>
             <SplineScene />
           </LazyScene>
         </div>
 
-        {/* Floating Text Overlay */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pointer-events-none">
-          {/* 3. Mobile: Darker background for contrast, tighter padding. */}
           <div className="text-left space-y-4 md:space-y-6 max-w-[95%] md:max-w-lg pointer-events-auto bg-black/60 md:bg-black/40 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-white/10 shadow-2xl">
             <h2 className="text-4xl md:text-7xl font-bold tracking-tighter">VISUAL <br /><span className="text-accent">EDITOR</span></h2>
             <p className="text-base md:text-lg opacity-80">
@@ -141,7 +136,8 @@ export default function Home() {
       </section>
 
       {/* Phase 7: Pure CSS Section (Light) */}
-      <section id="css3d" className="relative min-h-screen flex items-center justify-center border-t border-black/10 bg-base-300 text-black overflow-hidden pb-20">
+      {/* REMOVED pb-20 from here so it sits flush with the next section */}
+      <section id="css3d" className="relative min-h-screen flex items-center justify-center border-t border-black/10 bg-base-300 text-black overflow-hidden">
         <BackgroundText text="PURE MODERN CSS" darkText={true} />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
 
@@ -163,6 +159,29 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* Phase 8: tsParticles Section (Dark) */}
+      <section id="tsparticles" className="relative min-h-screen flex items-center justify-center border-t border-white/10 overflow-hidden bg-black mb-20">
+        <BackgroundText text="TS PARTICLES" />
+        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
+          <div className="text-left space-y-6">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">QUANTUM <br /><span className="text-info">CONSTELLATION</span></h2>
+            <p className="text-xl opacity-70 max-w-md">
+              Move your mouse through the grid. By leveraging native 2D canvas rendering with mathematical parallax, we can create the illusion of extreme 3D volumetric space with a fraction of the performance overhead.
+            </p>
+            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-info">
+              <li>High-performance 2D Canvas rendering</li>
+              <li>Mathematical Parallax Z-Depth</li>
+              <li>Interactive node tethering</li>
+            </ul>
+          </div>
+          <div className="h-[600px] w-full flex items-center justify-center">
+            {/* Added the new ParticlesScene! */}
+            <ParticlesScene />
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }
