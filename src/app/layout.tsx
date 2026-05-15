@@ -6,7 +6,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "3D Dimensions Unleashed",
+  title: "3D Web Show",
   description: "Exploring Framer Motion, Three.js, Spline, and more",
 };
 
