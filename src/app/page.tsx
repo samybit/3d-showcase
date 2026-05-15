@@ -10,8 +10,11 @@ import GlobeScene from "@/components/GlobeScene";
 import AtroposScene from "@/components/AtroposScene";
 import PureCSSScene from "@/components/PureCSSScene";
 import ParticlesScene from "@/components/ParticlesScene";
+import MobileSafeWebGL from "@/components/MobileSafeWebGL";
 
 import LazyScene from "@/components/LazyScene";
+
+
 
 export default function Home() {
   return (
@@ -44,11 +47,11 @@ export default function Home() {
       <section id="threejs" className="relative min-h-screen flex items-center justify-center border-t border-black/10 bg-base-300 text-black overflow-hidden">
         <BackgroundText text="REACT THREE FIBER" darkText={true} />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
+
           <div className="h-[650px] w-full flex items-center justify-center order-2 lg:order-1">
-            <LazyScene>
-              <ThreeScene />
-            </LazyScene>
+            <MobileSafeWebGL />
           </div>
+
           <div className="text-left space-y-6 order-1 lg:order-2">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">NATIVE <br /><span className="text-secondary">WEBGL</span></h2>
             <p className="text-xl opacity-80 max-w-md">
@@ -161,7 +164,7 @@ export default function Home() {
       </section>
 
       {/* Phase 8: tsParticles Section (Dark) */}
-      <section id="tsparticles" className="relative min-h-screen flex items-center justify-center border-t border-white/10 overflow-hidden bg-black mb-20">
+      <section id="tsparticles" className="relative min-h-screen flex items-center justify-center border-t border-white/10 overflow-hidden bg-black">
         <BackgroundText text="TS PARTICLES" />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
           <div className="text-left space-y-6">
