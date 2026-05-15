@@ -14,13 +14,14 @@ export default function Navbar() {
   return (
     <>
       {/* LAYER 1: The Inverting Layer (mix-blend-difference) */}
-      <div className="navbar fixed top-0 z-40 w-full px-4 md:px-0 mix-blend-difference text-white">
+      {/* Changed md:px-0 to px-6 md:px-12 for proper edge spacing */}
+      <div className="navbar fixed top-0 z-40 w-full px-3 md:px-6 mix-blend-difference text-white">
         <div className="flex-1">
           <a href="#" className="btn btn-ghost text-xl tracking-widest font-bold hover:bg-transparent">
             3D<span className="opacity-0">WEB</span> {/* Invisible spacer */}
           </a>
         </div>
-        
+
         <div className="flex-none">
           <div className="hidden md:flex">
             <ul className="menu menu-horizontal px-1 font-semibold tracking-wide">
@@ -42,14 +43,15 @@ export default function Navbar() {
       </div>
 
       {/* LAYER 2: The Color Text Layer (Ignores blend, ignores clicks) */}
-      <div className="navbar fixed top-0 z-50 w-full px-4 md:px-0 pointer-events-none">
+      {/* Matched padding here (px-6 md:px-12) to keep the layers perfectly stacked */}
+      <div className="navbar fixed top-0 z-50 w-full px-3 md:px-6 pointer-events-none">
         <div className="flex-1">
           <a href="#" className="btn btn-ghost text-xl tracking-widest font-bold hover:bg-transparent">
             <span className="opacity-0">3D</span> {/* Invisible spacer */}
             <span className="text-primary pointer-events-auto">WEB</span> {/* Visible color! */}
           </a>
         </div>
-        
+
         {/* Invisible structural clone to guarantee exact pixel alignment */}
         <div className="flex-none opacity-0">
           <div className="hidden md:flex">
