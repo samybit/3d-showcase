@@ -27,17 +27,16 @@ export default function PureCSSScene() {
             // w-3 h-3 is 12px. We offset by -6px top/left to center the anchor points
             className="absolute top-1/2 left-1/2 w-3 h-3 -ml-[6px] -mt-[6px] bg-error rounded-full shadow-[0_0_15px_var(--color-error)] border border-white/50"
             style={{
-              // Pass the index to CSS as a native variable
-              '--index': i,
-              // Use modern CSS trigonometric functions to plot a 3D Lissajous curve.
-              // We calculate X, Y, and Z positions natively in the stylesheet.
+              // Use bracket notation to cast only the custom CSS property, 
+              // keeping the transform property strictly typed as a string.
+              ['--index' as any]: i,
               transform: `
                 translate3d(
                   calc(sin(var(--index) * 2deg * 3) * 150px),
                   calc(cos(var(--index) * 2deg * 2) * 150px),
                   calc(sin(var(--index) * 2deg * 5) * 150px)
                 )
-              ` as React.CSSProperties
+              `
             }}
           />
         ))}
