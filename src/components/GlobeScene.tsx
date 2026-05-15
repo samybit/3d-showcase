@@ -25,7 +25,10 @@ export default function GlobeScene() {
   }, []);
 
   return (
-    <div className="w-full h-full min-h-[500px] flex items-center justify-center cursor-move overflow-hidden rounded-3xl border border-white/10 bg-base-100 shadow-2xl relative">
+    <div
+      className="w-full h-full min-h-[500px] flex items-center justify-center cursor-move overflow-hidden rounded-3xl border border-white/10 bg-base-100 shadow-2xl relative"
+      style={{ touchAction: 'none' }}
+    >
       {/* Loading fallback while the heavy WebGL component loads */}
       <div className="absolute inset-0 flex items-center justify-center -z-10">
         <span className="loading loading-ring loading-lg text-info"></span>

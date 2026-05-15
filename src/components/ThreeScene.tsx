@@ -53,8 +53,10 @@ function ComplexGeometry() {
 
 export default function ThreeScene() {
   return (
-    // Added `touch-none` to fix the @use-gesture warning
-    <div className="w-full h-full cursor-grab active:cursor-grabbing touch-none">
+    <div
+      className="w-full h-full cursor-grab active:cursor-grabbing"
+      style={{ touchAction: 'none' }}
+    >
       <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} />
