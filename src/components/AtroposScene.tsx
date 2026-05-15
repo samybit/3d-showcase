@@ -2,56 +2,95 @@
 "use client";
 
 import Atropos from "atropos/react";
-// Atropos requires its core CSS to function correctly
 import "atropos/css";
 
 export default function AtroposScene() {
   return (
     <div className="w-full h-full flex items-center justify-center p-8">
       <Atropos
-        className="w-full max-w-sm aspect-[3/4] rounded-3xl"
+        className="w-full max-w-sm aspect-[5/7] rounded-[2rem]"
         activeOffset={40}
-        shadowScale={1.05}
+        shadowScale={1.1}
+        rotateXMax={15}
+        rotateYMax={15}
         highlight={true}
       >
-        {/* Container inside Atropos needs to match dimensions */}
-        <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/20 bg-base-100 shadow-2xl">
+        {/* Main Card Container: Dark, frosted glass look */}
+        <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-white/10 bg-gradient-to-br from-gray-900 to-black shadow-2xl">
 
-          {/* Deep Background: Pushed far back (-5) */}
+          {/* LAYER 1: Deep Background Glow (-8) */}
           <div
-            className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-warning/20 via-base-100 to-base-300"
-            data-atropos-offset="-5"
+            className="absolute -top-20 -right-20 w-64 h-64 bg-warning/30 blur-[80px] rounded-full"
+            data-atropos-offset="-8"
+          />
+          <div
+            className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/20 blur-[80px] rounded-full"
+            data-atropos-offset="-6"
           />
 
-          {/* Grid Layer: Pushed slightly back (-2) */}
+          {/* LAYER 2: The Grid (-4) */}
           <div
-            className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:20px_20px]"
-            data-atropos-offset="-2"
+            className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:24px_24px]"
+            data-atropos-offset="-4"
           />
 
-          {/* Main Content: Resting at 0 and popping out positively */}
-          <div className="absolute inset-0 flex flex-col items-center justify-between p-8 z-10">
+          {/* LAYER 3: Mid-ground Abstract Shapes (0 to 2) */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div
+              className="w-48 h-48 border border-white/10 rounded-full absolute"
+              data-atropos-offset="0"
+            />
+            <div
+              className="w-32 h-32 border border-warning/30 rounded-full absolute"
+              data-atropos-offset="2"
+            />
+          </div>
 
-            {/* Top Badge: Popping out (3) */}
-            <div data-atropos-offset="3" className="w-full flex justify-between items-center">
-              <span className="badge badge-warning badge-outline">LEVEL 6</span>
-              <div className="w-4 h-4 rounded-full bg-warning animate-pulse shadow-[0_0_15px_rgba(251,191,36,0.8)]" />
-            </div>
+          {/* LAYER 4: Foreground Content (4 to 8) */}
+          <div className="absolute inset-0 flex flex-col justify-between p-8 z-10 pointer-events-none">
 
-            {/* Center Graphic: Popping out aggressively (6) */}
-            <div data-atropos-offset="6" className="relative group cursor-pointer">
-              <div className="w-32 h-32 rounded-full border-4 border-warning flex items-center justify-center backdrop-blur-sm bg-black/30">
-                <span className="text-5xl font-black text-warning">A</span>
+            {/* Top Bar */}
+            <div className="w-full flex justify-between items-start">
+              <div data-atropos-offset="4" className="space-y-1">
+                <div className="text-xs font-mono text-white/50 tracking-widest">ID // 893-X</div>
+                <div className="badge badge-warning badge-sm outline-none border-none bg-warning/20 text-warning">
+                  ACTIVE
+                </div>
+              </div>
+              <div data-atropos-offset="5" className="w-8 h-8 rounded-full border-2 border-white/20 flex items-center justify-center backdrop-blur-md">
+                <div className="w-2 h-2 rounded-full bg-warning animate-pulse" />
               </div>
             </div>
 
-            {/* Bottom Text: Staggered pop out (2 to 4) */}
-            <div className="text-center w-full">
-              <h3 data-atropos-offset="4" className="text-3xl font-bold tracking-widest text-white mb-2 uppercase">
-                Hologram
+            {/* Center Core Graphic */}
+            <div className="flex-1 flex items-center justify-center w-full">
+              <div
+                data-atropos-offset="7"
+                className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-warning/80 to-primary/80 shadow-[0_0_30px_rgba(251,191,36,0.4)] flex items-center justify-center rotate-45 transform-gpu backdrop-blur-lg border border-white/30"
+              >
+                <div className="w-12 h-12 bg-black/50 rounded-lg -rotate-45" />
+              </div>
+            </div>
+
+            {/* Bottom Text Block */}
+            <div className="w-full space-y-1">
+              <h3
+                data-atropos-offset="8"
+                className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 tracking-tight"
+              >
+                QUANTUM
               </h3>
-              <p data-atropos-offset="2" className="text-xs opacity-60 font-mono">
-                OPTICAL_PARALLAX_ENGAGED
+              <p
+                data-atropos-offset="6"
+                className="text-sm font-mono text-warning tracking-widest uppercase"
+              >
+                Core Processing
+              </p>
+              <p
+                data-atropos-offset="4"
+                className="text-xs text-white/40 pt-2"
+              >
+                Hover to initialize parallax matrix.
               </p>
             </div>
 
