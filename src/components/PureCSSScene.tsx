@@ -4,7 +4,7 @@
 import React from "react";
 
 export default function PureCSSScene() {
-  // We need enough particles to clearly define the 3D curve
+  // Enough particles to clearly define the 3D curve
   const particles = 180;
 
   return (
@@ -12,7 +12,7 @@ export default function PureCSSScene() {
       <style>{`
         @keyframes rotate-knot {
           0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-          100% { transform: rotateX(360deg) rotateY(720deg) rotateZ(180deg); }
+          100% { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); }
         }
       `}</style>
 
@@ -27,8 +27,6 @@ export default function PureCSSScene() {
             // w-3 h-3 is 12px. We offset by -6px top/left to center the anchor points
             className="absolute top-1/2 left-1/2 w-3 h-3 -ml-[6px] -mt-[6px] bg-error rounded-full shadow-[0_0_15px_var(--color-error)] border border-white/50"
             style={{
-              // Use bracket notation to cast only the custom CSS property, 
-              // keeping the transform property strictly typed as a string.
               ['--index' as any]: i,
               transform: `
                 translate3d(
@@ -42,7 +40,7 @@ export default function PureCSSScene() {
         ))}
 
         {/* Central glowing core to anchor the visual */}
-        <div className="absolute top-1/2 left-1/2 w-16 h-16 -ml-8 -mt-8 bg-error/20 blur-xl rounded-full" />
+        {/* <div className="absolute top-1/2 left-1/2 w-16 h-16 -ml-8 -mt-8 bg-error/20 blur-xl rounded-full" /> */}
       </div>
     </div>
   );
