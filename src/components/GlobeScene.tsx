@@ -1,4 +1,3 @@
-// src/components/GlobeScene.tsx
 "use client";
 
 import { useEffect, useState, useRef } from "react";
@@ -11,11 +10,18 @@ const HUB_LNG = 31.2357;
 
 export default function GlobeScene() {
   const globeRef = useRef<any>(null);
+
+  // A ref to track if this component is currently rendered in the DOM
+  const isMounted = useRef(true);
+
   const [arcsData, setArcsData] = useState<any[]>([]);
   const [ringsData, setRingsData] = useState<any[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    // Component has mounted!
+    isMounted.current = true;
+
     const N = 30;
     const arcs = [];
     const rings = [];
@@ -53,36 +59,38 @@ export default function GlobeScene() {
 
     setArcsData(arcs);
     setRingsData(rings);
+
+    // Cleanup function. If LazyScene unmounts us, switch this to false!
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
-  // Use this function instead of useEffect to guarantee the globe is ready
   const handleGlobeReady = () => {
+    // The Firewall. If the component was unmounted while the globe was loading, abort!
+    if (!isMounted.current) return;
+
     setIsLoaded(true);
 
     if (globeRef.current) {
-      const controls = globeRef.current.controls();
+      // Keep the GPU optimization we added earlier!
       const renderer = globeRef.current.renderer();
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
-      // Keep cinematic rotation
+      const controls = globeRef.current.controls();
       controls.autoRotate = true;
       controls.autoRotateSpeed = 1.2;
 
-      // Zoom is natively enabled by default, so we don't need to disable it anymore!
-
-      // Pan to hub
       globeRef.current.pointOfView({ lat: HUB_LAT, lng: HUB_LNG, altitude: 2.2 }, 3000);
     }
   };
 
-  // 1. Function to pause rotation
   const handleMouseEnter = () => {
     if (globeRef.current) {
       globeRef.current.controls().autoRotate = false;
     }
   };
 
-  // 2. Function to resume rotation
   const handleMouseLeave = () => {
     if (globeRef.current) {
       globeRef.current.controls().autoRotate = true;
@@ -93,11 +101,9 @@ export default function GlobeScene() {
     <div
       className="w-full h-full min-h-[600px] flex items-center justify-center cursor-move overflow-hidden rounded-3xl bg-gradient-to-b from-base-100 to-black shadow-2xl relative"
       style={{ touchAction: 'none' }}
-      // 3. Attach the mouse events to the wrapper
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Loading fallback */}
       <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 z-10 ${isLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <span className="loading loading-ring loading-lg text-info"></span>
       </div>
@@ -123,12 +129,6 @@ export default function GlobeScene() {
           atmosphereAltitude={0.15}
         />
       </div>
-
-      {/* <div className="absolute top-6 left-6 z-20 pointer-events-none">
-        <div className="badge badge-info badge-outline bg-black/50 backdrop-blur-md">
-          LIVE DATA STREAM
-        </div>
-      </div> */}
     </div>
   );
 }

@@ -40,8 +40,6 @@ export default function SplineScene() {
   };
 
   return (
-    // REMOVED: rounded-3xl, shadow, border, bg-base-100
-    // ADDED: w-full h-full absolute inset-0
     <div className="absolute inset-0 w-full h-full group z-0">
 
       {/* Loading fallback */}
