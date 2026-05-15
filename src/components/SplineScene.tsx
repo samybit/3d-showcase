@@ -49,7 +49,7 @@ export default function SplineScene() {
         <span className="loading loading-ring loading-lg text-accent"></span>
       </div>
 
-      <div className="absolute inset-0 z-10 overflow-hidden">
+      <div className="absolute inset-0 z-10 overflow-hidden translate-y-1/4 md:translate-y-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -73,13 +73,13 @@ export default function SplineScene() {
       </div>
 
       {/* Glassmorphic Control UI (Now floats at the absolute bottom of the screen) */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/10 shadow-lg z-20 transition-transform duration-300 transform group-hover:translate-y-0 opacity-0 group-hover:opacity-100">
+      <div className="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-4 bg-black/60 md:bg-black/40 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/10 shadow-lg z-20 transition-all duration-300 transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 opacity-100 md:opacity-0 md:group-hover:opacity-100">
         <button onClick={handlePrev} className="btn btn-circle btn-sm btn-ghost hover:bg-white/20 text-white">
           ❮
         </button>
-        <div className="text-center min-w-[140px]">
-          <p className="text-sm font-bold text-accent truncate">{SPLINE_SCENES[index].title}</p>
-          <p className="text-xs text-white/60 font-mono tracking-widest">{index + 1} / {SPLINE_SCENES.length}</p>
+        <div className="text-center min-w-[120px] md:min-w-[140px]">
+          <p className="text-xs md:text-sm font-bold text-accent truncate">{SPLINE_SCENES[index].title}</p>
+          <p className="text-[10px] md:text-xs text-white/60 font-mono tracking-widest">{index + 1} / {SPLINE_SCENES.length}</p>
         </div>
         <button onClick={handleNext} className="btn btn-circle btn-sm btn-ghost hover:bg-white/20 text-white">
           ❯

@@ -64,26 +64,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Phase 4: Spline Section (Full Bleed Background Layout) */}
-      <section id="spline" className="relative min-h-screen flex items-center border-t border-white/10 overflow-hidden bg-black">
+      {/* Phase 4: Spline Section (Responsive Full Bleed) */}
+      <section
+        id="spline"
+        // 1. Mobile: Align to top with padding. Desktop: Center perfectly.
+        className="relative min-h-screen flex items-start pt-28 md:pt-0 md:items-center border-t border-white/10 overflow-hidden bg-black"
+      >
         <BackgroundText text="SPLINE DESIGN" />
 
-        {/* 1. The 3D Scene is now the absolute background */}
-        <div className="absolute inset-0 z-0 translate-x-1/4">
+        {/* 2. Mobile: No translation (center). Desktop: Push 25% to the right. */}
+        <div className="absolute inset-0 z-0 md:translate-x-1/4">
           <LazyScene>
             <SplineScene />
           </LazyScene>
         </div>
 
-        {/* 2. Floating Text Overlay */}
+        {/* Floating Text Overlay */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pointer-events-none">
-          {/* Glassmorphic text box ensures readability over bright 3D scenes */}
-          <div className="text-left space-y-6 max-w-lg pointer-events-auto bg-black/40 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">VISUAL <br /><span className="text-accent">EDITOR</span></h2>
-            <p className="text-lg opacity-80">
+          {/* 3. Mobile: Darker background for contrast, tighter padding. */}
+          <div className="text-left space-y-4 md:space-y-6 max-w-[95%] md:max-w-lg pointer-events-auto bg-black/60 md:bg-black/40 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-white/10 shadow-2xl">
+            <h2 className="text-4xl md:text-7xl font-bold tracking-tighter">VISUAL <br /><span className="text-accent">EDITOR</span></h2>
+            <p className="text-base md:text-lg opacity-80">
               Interact with the background. Spline provides a visual 3D modeling environment that exports directly into React components. It abstracts away the complex math of Three.js into a designer-friendly interface.
             </p>
-            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-accent font-medium">
+            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-accent font-medium text-sm md:text-base">
               <li>Visual editing and animation</li>
               <li>Built-in interactivity and states</li>
               <li>Easy React component export</li>
