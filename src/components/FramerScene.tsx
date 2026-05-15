@@ -14,11 +14,16 @@ export default function FramerScene() {
   const springX = useSpring(mouseX, springConfig);
   const springY = useSpring(mouseY, springConfig);
 
-  // 3. Map the spring values to 3D rotation angles
-  const rotateX = useTransform(springY, [0, 1], [15, -15]);
-  const rotateY = useTransform(springX, [0, 1], [-15, 15]);
+  // 3. Map the spring values to 3D rotation angles (Increased for more drama)
+  const rotateX = useTransform(springY, [0, 1], [25, -25]);
+  const rotateY = useTransform(springX, [0, 1], [-25, 25]);
 
-  // 4. Handle mouse movement relative to the container
+  // 4. Map the springs to a dynamic glare/sheen effect
+  const glareX = useTransform(springX, [0, 1], ["-100%", "100%"]);
+  const glareY = useTransform(springY, [0, 1], ["-100%", "100%"]);
+  const glareOpacity = useTransform(springY, [0, 1], [0.1, 0.4]);
+
+  // 5. Handle mouse movement relative to the container
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     const xPct = (e.clientX - rect.left) / rect.width;
@@ -27,7 +32,7 @@ export default function FramerScene() {
     mouseY.set(yPct);
   }
 
-  // 5. Reset to center when the mouse leaves
+  // 6. Reset to center when the mouse leaves
   function handleMouseLeave() {
     mouseX.set(0.5);
     mouseY.set(0.5);
@@ -35,7 +40,7 @@ export default function FramerScene() {
 
   return (
     <div
-      className="w-full h-full flex items-center justify-center p-8"
+      className="w-full h-full flex items-center justify-center p-8 group"
       style={{ perspective: 1200 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -46,49 +51,78 @@ export default function FramerScene() {
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative w-full max-w-md aspect-[3/4] rounded-3xl bg-base-100/10 border border-white/10 backdrop-blur-md shadow-2xl flex flex-col items-center justify-center"
+        className="relative w-full max-w-md aspect-[3/4] rounded-3xl bg-base-100/40 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center overflow-hidden"
       >
-        {/* Layer 1: Glowing orb pushed back into the card */}
+        {/* Layer 1: Dynamic Glare (Moves with the light source) */}
         <motion.div
-          style={{ transform: "translateZ(-50px)" }}
-          className="absolute w-48 h-48 bg-primary rounded-full blur-[80px] opacity-40"
+          style={{ x: glareX, y: glareY, opacity: glareOpacity }}
+          className="absolute inset-0 z-50 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_50%)] mix-blend-overlay"
         />
 
-        {/* Layer 2: Grid background resting slightly above the card surface */}
+        {/* Layer 2: Deep Background Orb */}
         <motion.div
-          style={{ transform: "translateZ(20px)" }}
-          className="absolute inset-4 rounded-2xl border border-white/5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] opacity-20"
+          style={{ z: -80 }}
+          className="absolute w-64 h-64 bg-primary rounded-full blur-[100px] opacity-30"
         />
 
-        {/* Layer 3: Main UI elements floating significantly higher */}
+        {/* Layer 3: Floating Grid Base */}
         <motion.div
-          style={{ transform: "translateZ(80px)", transformStyle: "preserve-3d" }}
+          style={{ z: 20 }}
+          className="absolute inset-6 rounded-2xl border border-white/5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px] opacity-10"
+        />
+
+        {/* Layer 4: 3D Gyroscope Rings (Replacing the single ring) */}
+        <motion.div
+          style={{ z: 60, transformStyle: "preserve-3d" }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <motion.div
+            animate={{ rotateX: 360, rotateY: 180 }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute w-72 h-72 border border-primary/30 rounded-full"
+          />
+          <motion.div
+            animate={{ rotateY: 360, rotateZ: 180 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute w-64 h-64 border border-secondary/30 rounded-full"
+          />
+          <motion.div
+            animate={{ rotateZ: 360, rotateX: 180 }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute w-56 h-56 border border-accent/30 rounded-full"
+          />
+        </motion.div>
+
+        {/* Layer 5: High-Z Foreground UI */}
+        <motion.div
+          style={{ z: 100, transformStyle: "preserve-3d" }}
           className="flex flex-col items-center gap-6 z-10"
         >
-          <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/30">
-            <span className="text-4xl font-black text-black">DOM</span>
-          </div>
+          {/* Super elevated logo block */}
+          <motion.div
+            style={{ z: 140 }}
+            className="w-28 h-28 rounded-2xl bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/20"
+          >
+            <span className="text-5xl font-black text-white drop-shadow-lg">DOM</span>
+          </motion.div>
 
-          <div className="text-center">
-            <h3 className="text-3xl font-bold tracking-tight text-white mb-2">CSS 3D</h3>
-            <p className="text-sm opacity-70 max-w-[250px]">
-              Manipulating the Document Object Model in three-dimensional space using physics-based values.
+          <div className="text-center space-y-2">
+            <h3 className="text-4xl font-bold tracking-tight text-white drop-shadow-md">CSS Physics</h3>
+            <p className="text-sm text-white/70 max-w-[260px] font-medium">
+              Zero WebGL. 100% native DOM elements rendered in absolute 3D space using Framer Motion.
             </p>
           </div>
 
-          <div className="flex gap-2">
-            <div className="badge badge-primary badge-outline">X/Y Tracking</div>
-            <div className="badge badge-secondary badge-outline">Spring Physics</div>
+          <div className="flex gap-3 pt-4">
+            <div className="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-white backdrop-blur-md shadow-lg">
+              X/Y Tracking
+            </div>
+            <div className="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-white backdrop-blur-md shadow-lg">
+              Spring Physics
+            </div>
           </div>
         </motion.div>
 
-        {/* Layer 4: Decorative floating ring at maximum Z-depth */}
-        <motion.div
-          style={{ transform: "translateZ(120px)" }}
-          className="absolute w-64 h-64 border border-secondary/30 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
       </motion.div>
     </div>
   );
