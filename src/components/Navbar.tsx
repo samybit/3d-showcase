@@ -1,9 +1,8 @@
-// src/components/Navbar.tsx
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100/50 backdrop-blur-md fixed top-0 z-50 border-b border-white/10">
+    <div className="navbar fixed top-0 z-50 w-full mix-blend-difference text-white">
       <div className="flex-1">
-        <a href="#" className="btn btn-ghost text-xl tracking-widest font-bold">
+        <a href="#" className="btn btn-ghost text-xl tracking-widest font-bold hover:bg-transparent">
           3D<span className="text-primary">WEB</span>
         </a>
       </div>
