@@ -7,6 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const SPLINE_SCENES = [
   {
+    title: "R4X Bot",
+    url: "https://prod.spline.design/zxEeXa12OP7sZIeU/scene.splinecode",
+  },
+  {
     title: "Boxes Hover",
     url: "https://prod.spline.design/FyKGH-PYH9QRf9j5/scene.splinecode",
   },
@@ -14,10 +18,6 @@ const SPLINE_SCENES = [
     title: "Interactive Keyboard",
     url: "https://prod.spline.design/K8YPYhDudHxbZz9E/scene.splinecode",
   },
-  {
-    title: "Interactive Controller",
-    url: "https://prod.spline.design/aj0gt8vzVzVy-FfK/scene.splinecode",
-  }
 ];
 
 export default function SplineScene() {
