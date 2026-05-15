@@ -15,7 +15,10 @@ export default function SplineScene() {
         This URL points to a public 3D interactive keyboard created in Spline.
         You can replace this with your own .splinecode export URL later.
       */}
-      <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
+      <Spline
+        style={{ touchAction: 'none' }}
+        scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
+      />
     </div>
   );
 }
