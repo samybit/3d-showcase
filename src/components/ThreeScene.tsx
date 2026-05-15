@@ -25,18 +25,20 @@ function ComplexGeometry() {
   });
 
   return (
-    <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
+    <Float speed={2} rotationIntensity={1.5} floatIntensity={0}>
       {/* Outer Glass Shell */}
       <mesh ref={meshRef}>
         <torusKnotGeometry args={[1.4, 0.4, 256, 32, 3, 4]} />
         <MeshTransmissionMaterial
           backside
+          resolution={256}
+          samples={4}
           backsideThickness={2}
           thickness={0.5}
           roughness={0}
           transmission={1}
           ior={1.5}
-          chromaticAberration={0.15}
+          chromaticAberration={0.06}
           anisotropy={0.3}
           color="#a3e635"
         />
@@ -57,6 +59,7 @@ export default function ThreeScene() {
       className="w-full h-full cursor-grab active:cursor-grabbing">
       {/* Pulled the camera back from Z:8 to Z:9.5 to fit the shadow in frame */}
       <Canvas
+        dpr={[1, 1]}
         style={{ touchAction: 'none' }}
         camera={{ position: [0, 0, 9.5], fov: 45 }}
       >
