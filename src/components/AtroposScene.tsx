@@ -2,7 +2,7 @@
 "use client";
 
 import Atropos from "atropos/react";
-import "atropos/css";
+import "atropos/atropos.css";
 
 export default function AtroposScene() {
   return (
