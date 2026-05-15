@@ -1,4 +1,3 @@
-// components/Hero.tsx
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-base-300">
@@ -10,7 +9,7 @@ export default function Hero() {
           </span>
         </h1>
         <p className="text-xl md:text-2xl opacity-80 max-w-2xl mx-auto mb-10">
-          Scroll down to explore three unique approaches to rendering the third dimension in the browser.
+          Scroll down to explore six unique approaches to rendering the third dimension in the browser.
         </p>
         <a href="#framer" className="btn btn-primary btn-lg rounded-full">
           Begin Journey
