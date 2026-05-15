@@ -79,17 +79,17 @@ export default function FramerScene() {
           <motion.div
             animate={{ rotateX: 360, rotateY: 180 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className="absolute w-72 h-72 border border-primary/30 rounded-full"
+            className="absolute w-72 h-72 border-[3px] border-primary/80 shadow-lg shadow-primary/40 rounded-full"
           />
           <motion.div
             animate={{ rotateY: 360, rotateZ: 180 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute w-64 h-64 border border-secondary/30 rounded-full"
+            className="absolute w-64 h-64 border-[3px] border-secondary/80 shadow-lg shadow-secondary/40 rounded-full"
           />
           <motion.div
             animate={{ rotateZ: 360, rotateX: 180 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute w-56 h-56 border border-accent/30 rounded-full"
+            className="absolute w-56 h-56 border-[3px] border-accent/80 shadow-lg shadow-accent/40 rounded-full"
           />
         </motion.div>
 
