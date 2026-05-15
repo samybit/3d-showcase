@@ -61,6 +61,8 @@ export default function GlobeScene() {
 
     if (globeRef.current) {
       const controls = globeRef.current.controls();
+      const renderer = globeRef.current.renderer();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
       // Keep cinematic rotation
       controls.autoRotate = true;
