@@ -45,7 +45,7 @@ export default function Home() {
       <section id="threejs" className="relative min-h-screen flex items-center justify-center border-t border-black/10 bg-base-300 text-black overflow-hidden">
         <BackgroundText text="REACT THREE FIBER" darkText={true} />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
-          <div className="h-[600px] w-full flex items-center justify-center order-2 lg:order-1">
+          <div className="h-[650px] w-full flex items-center justify-center order-2 lg:order-1">
             <LazyScene>
               <ThreeScene />
             </LazyScene>

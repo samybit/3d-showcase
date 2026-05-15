@@ -57,11 +57,11 @@ export default function ThreeScene() {
       className="w-full h-full cursor-grab active:cursor-grabbing"
       style={{ touchAction: 'none' }}
     >
-      <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
+      {/* Pulled the camera back from Z:8 to Z:9.5 to fit the shadow in frame */}
+      <Canvas camera={{ position: [0, 0, 9.5], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} />
 
-        {/* Fixed: snap is now just a boolean, and removed extreme physics configs */}
         <PresentationControls
           global
           snap={true}
@@ -74,7 +74,17 @@ export default function ThreeScene() {
         </PresentationControls>
 
         <Environment preset="city" />
-        <ContactShadows position={[0, -3.5, 0]} opacity={0.7} scale={20} blur={2.5} far={4.5} />
+
+        {/* Raised the shadow from -3.5 to -2.5 and reduced scale to 15. 
+          This ensures the shadow fully resolves inside the canvas boundaries.
+        */}
+        <ContactShadows 
+          position={[0, -2.0, 0]} 
+          opacity={0.7} 
+          scale={10} 
+          blur={2} 
+          far={3} 
+        />
       </Canvas>
     </div>
   );
