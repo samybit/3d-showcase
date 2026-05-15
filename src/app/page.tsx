@@ -1,13 +1,18 @@
-// src/app/page.tsx
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+
 import BackgroundText from "@/components/BackgroundText";
+
 import FramerScene from "@/components/FramerScene";
 import ThreeScene from "@/components/ThreeScene";
 import SplineScene from "@/components/SplineScene";
 import GlobeScene from "@/components/GlobeScene";
 import AtroposScene from "@/components/AtroposScene";
 import PureCSSScene from "@/components/PureCSSScene";
+
+import LazyScene from "@/components/LazyScene";
+
+
 
 export default function Home() {
   return (
@@ -20,7 +25,7 @@ export default function Home() {
         <BackgroundText text="FRAMER MOTION" />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
           <div className="text-left space-y-6">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">DOM <br/><span className="text-primary">PHYSICS</span></h2>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">DOM <br /><span className="text-primary">PHYSICS</span></h2>
             <p className="text-xl opacity-70 max-w-md">
               Hover over the card. We are not rendering to a canvas here. This is raw HTML manipulated in 3D space using CSS transforms, driven by React and Framer Motion's physics engine.
             </p>
@@ -41,10 +46,12 @@ export default function Home() {
         <BackgroundText text="REACT THREE FIBER" darkText={true} />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
           <div className="h-[600px] w-full flex items-center justify-center order-2 lg:order-1">
-            <ThreeScene />
+            <LazyScene>
+              <ThreeScene />
+            </LazyScene>
           </div>
           <div className="text-left space-y-6 order-1 lg:order-2">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">NATIVE <br/><span className="text-secondary">WEBGL</span></h2>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">NATIVE <br /><span className="text-secondary">WEBGL</span></h2>
             <p className="text-xl opacity-80 max-w-md">
               Grab and drag the object. This is a WebGL canvas rendering a complex mathematical geometry (Torus Knot) in real-time. The material calculates actual light refraction, chromatic aberration, and thickness.
             </p>
@@ -62,7 +69,7 @@ export default function Home() {
         <BackgroundText text="SPLINE DESIGN" />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
           <div className="text-left space-y-6">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">VISUAL <br/><span className="text-accent">EDITOR</span></h2>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">VISUAL <br /><span className="text-accent">EDITOR</span></h2>
             <p className="text-xl opacity-70 max-w-md">
               Interact with the keyboard. Spline provides a visual 3D modeling environment that exports directly into React components. It abstracts away the complex math of Three.js into a designer-friendly interface.
             </p>
@@ -73,7 +80,9 @@ export default function Home() {
             </ul>
           </div>
           <div className="h-[600px] w-full flex items-center justify-center p-4">
-            <SplineScene />
+            <LazyScene>
+              <SplineScene />
+            </LazyScene>
           </div>
         </div>
       </section>
@@ -83,10 +92,12 @@ export default function Home() {
         <BackgroundText text="REACT GLOBE GL" darkText={true} />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
           <div className="h-[600px] w-full flex items-center justify-center order-2 lg:order-1">
-            <GlobeScene />
+            <LazyScene>
+              <GlobeScene />
+            </LazyScene>
           </div>
           <div className="text-left space-y-6 order-1 lg:order-2">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">DATA <br/><span className="text-info">GEOSPATIAL</span></h2>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">DATA <br /><span className="text-info">GEOSPATIAL</span></h2>
             <p className="text-xl opacity-80 max-w-md">
               Spin the earth. When dealing with 3D data visualization, specialized libraries like Globe.gl map geographical coordinates to WebGL geometry, allowing thousands of animated data points to render effortlessly.
             </p>
@@ -104,7 +115,7 @@ export default function Home() {
         <BackgroundText text="ATROPOS PARALLAX" />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
           <div className="text-left space-y-6">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">MICRO <br/><span className="text-warning">INTERACTIONS</span></h2>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">MICRO <br /><span className="text-warning">INTERACTIONS</span></h2>
             <p className="text-xl opacity-70 max-w-md">
               Hover over the data slab. Atropos creates stunning, multi-layered holographic parallax effects. It excels at adding extreme depth to UI cards and heroic imagery without the heavy overhead of a full 3D engine.
             </p>
@@ -124,13 +135,13 @@ export default function Home() {
       <section id="css3d" className="relative min-h-screen flex items-center justify-center border-t border-black/10 bg-base-300 text-black overflow-hidden pb-20">
         <BackgroundText text="PURE MODERN CSS" darkText={true} />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
-          
+
           <div className="h-[600px] w-full flex items-center justify-center order-2 lg:order-1">
             <PureCSSScene />
           </div>
 
           <div className="text-left space-y-6 order-1 lg:order-2">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">NATIVE <br/><span className="text-error">BROWSER MATH</span></h2>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">NATIVE <br /><span className="text-error">BROWSER MATH</span></h2>
             <p className="text-xl opacity-80 max-w-md">
               This 3D Lissajous knot uses zero JavaScript for its physics or positioning. It relies entirely on native CSS trigonometric functions <code>sin()</code> and <code>cos()</code> calculated inside the browser engine.
             </p>
