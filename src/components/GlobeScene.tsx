@@ -73,10 +73,27 @@ export default function GlobeScene() {
     }
   };
 
+  // 1. Function to pause rotation
+  const handleMouseEnter = () => {
+    if (globeRef.current) {
+      globeRef.current.controls().autoRotate = false;
+    }
+  };
+
+  // 2. Function to resume rotation
+  const handleMouseLeave = () => {
+    if (globeRef.current) {
+      globeRef.current.controls().autoRotate = true;
+    }
+  };
+
   return (
     <div
       className="w-full h-full min-h-[600px] flex items-center justify-center cursor-move overflow-hidden rounded-3xl bg-gradient-to-b from-base-100 to-black shadow-2xl relative"
       style={{ touchAction: 'none' }}
+      // 3. Attach the mouse events to the wrapper
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Loading fallback */}
       <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 z-10 ${isLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
