@@ -104,9 +104,11 @@ export default function GlobeScene() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 z-10 ${isLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-        <span className="loading loading-ring loading-lg text-info"></span>
-      </div>
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center z-10 bg-black/20 backdrop-blur-sm">
+          <span className="loading loading-ring loading-lg text-primary drop-shadow-md"></span>
+        </div>
+      )}
 
       <div className="absolute inset-0 flex items-center justify-center">
         <Globe

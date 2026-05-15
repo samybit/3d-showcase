@@ -43,9 +43,11 @@ export default function SplineScene() {
     <div className="absolute inset-0 w-full h-full group z-0">
 
       {/* Loading fallback */}
-      <div className="absolute inset-0 flex items-center justify-center z-0">
-        <span className="loading loading-ring loading-lg text-accent"></span>
-      </div>
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center z-10 bg-black/20 backdrop-blur-sm">
+          <span className="loading loading-ring loading-lg text-primary drop-shadow-md"></span>
+        </div>
+      )}
 
       <div className="absolute inset-0 z-10 overflow-hidden translate-y-1/4 md:translate-y-0">
         <AnimatePresence mode="wait">

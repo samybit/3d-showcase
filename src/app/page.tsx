@@ -179,7 +179,6 @@ export default function Home() {
             </ul>
           </div>
           <div className="h-[600px] w-full flex items-center justify-center">
-            {/* Added the new ParticlesScene! */}
             <ParticlesScene />
           </div>
         </div>
