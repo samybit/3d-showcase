@@ -114,12 +114,25 @@ export default function FramerScene() {
           </div>
 
           <div className="flex gap-3 pt-4">
-            <div className="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-white backdrop-blur-md shadow-lg">
+            <motion.button
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => alert("Native DOM click event fired! No WebGL raycasting required.")}
+              className="px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold text-white backdrop-blur-md shadow-lg cursor-pointer"
+            >
               X/Y Tracking
-            </div>
-            <div className="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-white backdrop-blur-md shadow-lg">
+            </motion.button>
+
+            <motion.button
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => alert("Spring physics activated! Notice how the 3D card keeps tracking your mouse even while the button alerts.")}
+              className="px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold text-white backdrop-blur-md shadow-lg cursor-pointer"
+            >
               Spring Physics
-            </div>
+            </motion.button>
           </div>
         </motion.div>
 
