@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DIMENSIONS UNLEASHED: 3D Web Showcase
 
-## Getting Started
+A vertical storytelling web experience exploring six distinct approaches to rendering the third dimension in the browser. 
 
-First, run the development server:
+This project serves as both a visual showcase and a technical reference for implementing different 3D libraries and techniques within a modern React framework.
+
+## 🛠 Tech Stack
+* **Framework:** Next.js 16.2.6 (App Router + Turbopack)
+* **UI Library:** React 19
+* **Styling:** Tailwind CSS v4 + DaisyUI v5.0 (Dark/Black theme primary)
+* **Language:** TypeScript
+
+## 🚀 The 6 Phases (Implemented Sections)
+
+The page is structured as a single continuous scroll, featuring an alternating "zebra stripe" high-contrast background (Black and off-white/5% opacity).
+
+1.  **Phase 1: Setup & Hero**
+    * Sticky glassmorphism Navbar with smooth anchor scrolling.
+    * Hero section introducing the showcase.
+    * Reusable `BackgroundText` utility component for massive, subtle background typography.
+2.  **Phase 2: Framer Motion (DOM Physics)**
+    * Raw HTML manipulated in 3D space using CSS transforms and Framer Motion's physics engine (`rotateX`, `rotateY`, `translateZ`, `perspective`).
+3.  **Phase 3: React Three Fiber (Native WebGL)**
+    * Native WebGL pipeline via Three.js.
+    * Features a complex Torus Knot utilizing `MeshTransmissionMaterial` for real-time light refraction and glass physics, wrapped in `PresentationControls` for drag interaction.
+4.  **Phase 4: Spline (Visual Editor)**
+    * Interactive 3D scene built via Spline's visual editor and exported using `@splinetool/react-spline`.
+5.  **Phase 5: Globe.gl (Data Geospatial)**
+    * Data visualization mapping geographical coordinates to 3D space using `react-globe.gl` (forced client-side rendering via `next/dynamic`).
+6.  **Phase 6: Atropos (Micro-Interactions)**
+    * Holographic parallax hover effects and multi-layered UI depth utilizing `atropos`.
+7.  **Phase 7: Pure Modern CSS (Native Browser Math)**
+    * A 3D Lissajous knot built with zero JavaScript physics.
+    * Relies entirely on native CSS trigonometric functions (`sin()` and `cos()`) inside `calc()` combined with hardware-accelerated `translate3d`.
+
+## ⚡ Performance Optimizations & Technical Decisions
+
+We encountered and resolved several critical performance bottlenecks and configuration clashes due to the heavy nature of stacking multiple WebGL contexts:
+
+* **GPU Context Management (The `LazyScene` Wrapper):** Running Three.js, Globe.gl, and Spline simultaneously caused severe GPU memory leaks and hard system freezes. We built a `LazyScene` wrapper using Framer Motion's `useInView` to unmount heavy WebGL canvases when they scroll out of the viewport, preserving memory.
+* **Turbopack vs. Webpack Aliasing:** To resolve "Multiple instances of Three.js" warnings between `@react-three/fiber` and `@splinetool/react-spline`, we aliased `three` in `next.config.ts`. Because Next.js 16 defaults to Turbopack, we explicitly configured the `turbopack` block alongside `webpack`.
+* **Touch Action Fixes:** Added `style={{ touchAction: 'none' }}` to draggable WebGL canvases to satisfy the `@use-gesture` library and prevent touch-scrolling conflicts.
+* **Framer Motion Type Safety:** Replaced unnecessary `<motion.div>` elements with standard `<div>` elements for static depth layers to optimize performance and resolve `Transform | undefined` TypeScript errors.
+* **CSS Custom Property Types:** Used bracket notation `['--index' as any]` in React style props to pass custom CSS variables to our Pure CSS 3D scene without breaking standard `CSSProperties` type checking.
+
+## ⚠️ Known Quirks (Safe to Ignore)
+
+* **Console Warnings in Dev:** You will see warnings like `Multiple instances of Three.js being imported` and `THREE.Clock: This module has been deprecated`. This is caused by `@splinetool/react-spline` relying on a pre-compiled, heavily customized internal version of Three.js that bypasses Next.js alias configs. These warnings only show in development and will be stripped in production.
+
+## 🏃‍♂️ How to Run
 
 ```bash
+# Install dependencies
+npm install
+
+# Run the development server (uses Turbopack)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open http://localhost:3000 with your browser to see the result.
