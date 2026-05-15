@@ -64,25 +64,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Phase 4: Spline Section (Dark) */}
-      <section id="spline" className="relative min-h-screen flex items-center justify-center border-t border-white/10 overflow-hidden">
+      {/* Phase 4: Spline Section (Full Bleed Background Layout) */}
+      <section id="spline" className="relative min-h-screen flex items-center border-t border-white/10 overflow-hidden bg-black">
         <BackgroundText text="SPLINE DESIGN" />
-        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
-          <div className="text-left space-y-6">
+
+        {/* 1. The 3D Scene is now the absolute background */}
+        <div className="absolute inset-0 z-0 translate-x-1/4">
+          <LazyScene>
+            <SplineScene />
+          </LazyScene>
+        </div>
+
+        {/* 2. Floating Text Overlay */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pointer-events-none">
+          {/* Glassmorphic text box ensures readability over bright 3D scenes */}
+          <div className="text-left space-y-6 max-w-lg pointer-events-auto bg-black/40 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">VISUAL <br /><span className="text-accent">EDITOR</span></h2>
-            <p className="text-xl opacity-70 max-w-md">
-              Interact with the keyboard. Spline provides a visual 3D modeling environment that exports directly into React components. It abstracts away the complex math of Three.js into a designer-friendly interface.
+            <p className="text-lg opacity-80">
+              Interact with the background. Spline provides a visual 3D modeling environment that exports directly into React components. It abstracts away the complex math of Three.js into a designer-friendly interface.
             </p>
-            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-accent">
+            <ul className="space-y-2 opacity-80 list-disc list-inside marker:text-accent font-medium">
               <li>Visual editing and animation</li>
               <li>Built-in interactivity and states</li>
-              <li>Easy iframe or React component export</li>
+              <li>Easy React component export</li>
             </ul>
-          </div>
-          <div className="h-[600px] w-full flex items-center justify-center p-4">
-            <LazyScene>
-              <SplineScene />
-            </LazyScene>
           </div>
         </div>
       </section>
