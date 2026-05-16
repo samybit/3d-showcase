@@ -167,8 +167,8 @@ export default function Home() {
       <section id="tsparticles" className="relative min-h-screen flex items-center justify-center border-t border-white/10 overflow-hidden bg-black">
         <BackgroundText text="TS PARTICLES" />
         <ParticlesScene className="absolute inset-0 z-0" />
-        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
-          <div className="text-left space-y-6">
+        <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 pointer-events-none">
+          <div className="text-left space-y-6 pointer-events-auto">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">QUANTUM <br /><span className="text-info">CONSTELLATION</span></h2>
             <p className="text-xl opacity-70 max-w-md">
               Move your mouse through the grid. By leveraging native 2D canvas rendering with mathematical parallax, we can create the illusion of extreme 3D volumetric space with a fraction of the performance overhead.
@@ -179,7 +179,7 @@ export default function Home() {
               <li>Interactive node tethering</li>
             </ul>
           </div>
-          <div className="h-[600px] w-full flex items-center justify-center">
+          <div className="h-[600px] w-full flex items-center justify-center pointer-events-auto">
             {/* Re-created the card from the original ParticlesScene, but without the particles inside it. */}
             <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden rounded-3xl bg-black/20 backdrop-blur-sm border border-white/10 shadow-2xl group">
               {/* Floating Glassmorphic UI Overlay */}

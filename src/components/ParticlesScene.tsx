@@ -22,7 +22,7 @@ export default function ParticlesScene({ className }: { className?: string }) {
 
           // The 3D Magic happens here
           interactivity: {
-            detectsOn: "parent",
+            detectsOn: "window",
             events: {
               onHover: {
                 enable: true,
