@@ -40,8 +40,9 @@ export default function ParticlesScene({ className }: { className?: string }) {
                 links: { opacity: 0.6, color: "#38bdf8" }
               },
               repulse: {
-                distance: 300,
-                duration: 0.4
+                distance: 100, // Reduced radius so fewer particles are violently displaced at once
+                duration: 0.4,
+                factor: 50 // Softer impulse prevents particles from perfectly stacking on top of each other
               }
             },
           },
