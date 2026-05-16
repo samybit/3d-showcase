@@ -18,7 +18,7 @@ export default function ParticlesScene({ className }: { className?: string }) {
         options: {
           fullScreen: { enable: false },
           background: { color: "transparent" },
-          fpsLimit: 120, // High refresh rate for buttery smooth links
+          fpsLimit: 60,
 
           // The 3D Magic happens here
           interactivity: {
@@ -29,12 +29,20 @@ export default function ParticlesScene({ className }: { className?: string }) {
                 mode: ["grab"], // Tethers to the mouse
                 parallax: { enable: true, force: 60, smooth: 10 } // True 3D depth illusion!
               },
+              onClick: {
+                enable: true,
+                mode: "repulse" // Blast particles away to watch them slam into the borders
+              }
             },
             modes: {
               grab: {
                 distance: 250,
                 links: { opacity: 0.6, color: "#38bdf8" }
               },
+              repulse: {
+                distance: 300,
+                duration: 0.4
+              }
             },
           },
 
@@ -48,11 +56,15 @@ export default function ParticlesScene({ className }: { className?: string }) {
               opacity: 0.15,
               width: 1
             },
+            collisions: {
+              enable: true, // Physical collisions make it look like real objects bouncing
+              mode: "bounce",
+            },
             move: {
               enable: true,
-              speed: 0.8,
+              speed: 1.5, // Faster speed to make the bounces more obvious
               direction: "none",
-              random: true,
+              random: false, // Setting random to false ensures straight lines so the ricochet is clear
               straight: false,
               outModes: { default: "bounce" } // Traps them in the glass box
             },
