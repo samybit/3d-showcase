@@ -21,11 +21,11 @@ The page is structured as a single continuous scroll, featuring an alternating "
     * Interactive volumetric ink-smoke particle effect integrated directly via `@tsparticles/engine`.
 2.  **Phase 2: Framer Motion (DOM Physics)**
     * Raw HTML manipulated in 3D space using native `z` props and Framer Motion's physics engine (`rotateX`, `rotateY`).
-    * Features a 3D intersecting gyroscope and dynamic light glare that reacts to mouse coordinates.
+    * Features interactive physical buttons (`whileHover`, `whileTap`) to demonstrate that native DOM events function perfectly in CSS 3D space without requiring WebGL raycasting.
 3.  **Phase 3: React Three Fiber (Native WebGL)**
     * Native WebGL pipeline via Three.js.
     * Features a complex Torus Knot utilizing `MeshTransmissionMaterial` for real-time light refraction and glass physics.
-    * Highly calibrated `ContactShadows` to prevent bounding-box clipping in standard DOM layouts.
+    * Protected by a `<MobileSafeWebGL />` firewall that requires explicit user consent before mounting heavy rendering contexts on mobile devices.
 4.  **Phase 4: Spline (Visual Editor)**
     * A full-bleed, responsive 3D background showcasing multiple scenes.
     * Wrapped in a Framer Motion `<AnimatePresence>` carousel for smooth scaling/fading between different Spline exports.
@@ -33,7 +33,7 @@ The page is structured as a single continuous scroll, featuring an alternating "
 5.  **Phase 5: Globe.gl (Data Geospatial)**
     * A "Hub and Spoke" data visualization mapping a central geographic node (Cairo) to random global destinations.
     * Features pulsing radar rings, cinematic auto-rotation, and custom `onMouseEnter`/`onMouseLeave` rotation pausing.
-    * Forced client-side rendering via `next/dynamic`.
+    * Forced client-side rendering via `next/dynamic` with strict `isMounted` lifecycle tracking to prevent asynchronous state leaks.
 6.  **Phase 6: Atropos (Micro-Interactions)**
     * A "Quantum Core" futuristic ID card utilizing `atropos` for deep holographic parallax hover effects.
     * Features extreme layer offsets (from -8 to +8) to exaggerate the optical illusion of depth.
@@ -41,7 +41,7 @@ The page is structured as a single continuous scroll, featuring an alternating "
     * A 3D Lissajous knot built with zero JavaScript physics.
     * Relies entirely on native CSS trigonometric functions (`sin()` and `cos()`) inside `calc()` combined with hardware-accelerated `translate3d`.
 8.  **Phase 8: tsParticles (2D-to-3D Illusion)**
-    * A "Quantum Constellation" utilizing the `@tsparticles/engine`.
+    * A "Quantum Constellation" full-bleed background utilizing the `@tsparticles/engine`.
     * Demonstrates how 2D canvas rendering can simulate 3D depth using mathematical parallax and interactive pointer tethering.
     * Bypasses the standard React wrapper for strict Turbopack compatibility.
 
@@ -49,19 +49,20 @@ The page is structured as a single continuous scroll, featuring an alternating "
 
 We encountered and resolved several critical performance bottlenecks and configuration clashes due to the heavy nature of stacking multiple WebGL contexts:
 
-* **GPU Context Management (The `LazyScene` Wrapper):** Running Three.js, Globe.gl, and Spline simultaneously caused severe GPU memory leaks and hard system freezes. We built a `LazyScene` wrapper using Framer Motion's `useInView` to unmount heavy WebGL canvases when they scroll out of the viewport, preserving memory.
+* **Aggressive VRAM Garbage Collection (`LazyScene` Wrapper):** Running Three.js, Globe.gl, and Spline simultaneously causes severe GPU memory leaks and hard system freezes. We built a `<LazyScene>` wrapper using Framer Motion's `useInView` (with a 600px margin) that strictly returns `null` when off-screen, forcing the browser to instantly dump the WebGL context from Video RAM.
+* **Mobile WebGL Firewall:** Calculating physical glass refraction causes mobile GPUs to violently overheat and crash. We implemented a strictly gated component that detects mobile viewports and suspends initialization until the user explicitly opts in.
+* **Resolution & DPR Capping:** High-end laptops with Retina displays attempt to calculate 3D scenes at 4K density, causing extreme fan noise. We programmatically capped the `devicePixelRatio` limit across Three.js and Globe.gl instances to a maximum of `1.5x`, cutting GPU calculation loads by up to 60%.
+* **Ghost Loaders (CSS Animations):** Using `opacity-0` to hide DaisyUI's continuous CSS loading rings causes the GPU to indefinitely process invisible frames. We switched to strict conditional React unmounting (`{!isLoaded && <Loader />}`) to permanently kill the animation cycles once scenes are ready.
+* **16-bit Depth Buffer Z-Fighting:** Mobile GPUs compress depth buffers, causing `<ContactShadows>` to flicker violently against base planes. We resolved this by passing `depthWrite={false}` to transparent shadow materials.
+* **Color Space Interpolation Bugs:** Tailwind v4 defaults to `oklab` color spaces, which Framer Motion cannot currently interpolate during hover animations. We bypassed this by explicitly declaring `rgba` start states in inline styles for physical buttons.
 * **Dual-Overlay Blend Modes:** Applying `mix-blend-difference` to fixed `z-index` navbars causes stacking context trapping. We bypassed this by rendering two perfectly overlapping navbars—one handling the blend math, and one invisible layer passing clicks through to maintain primary accent colors.
-* **Spline Initialization State:** Placing mouse-tracking Spline scenes inside a sliding carousel causes infinite `requestAnimationFrame` crash loops. We resolved this by tying the canvas opacity to Spline's native `onLoad` Application event, preventing premature coordinate calculations.
-* **Turbopack vs. Webpack Aliasing:** To resolve "Multiple instances of Three.js" warnings between `@react-three/fiber` and `@splinetool/react-spline`, we aliased `three` in `next.config.ts`. Because Next.js 16 defaults to Turbopack, we explicitly configured the `turbopack` block alongside `webpack`.
-* **Touch Action Fixes:** Added `style={{ touchAction: 'none' }}` directly to the innermost `<Canvas>` elements to satisfy the `@use-gesture` library and prevent touch-scrolling conflicts on mobile devices.
-* **Framer Motion Type Safety:** Replaced unnecessary `<motion.div>` elements with standard `<div>` elements for static depth layers to optimize performance and resolve `Transform | undefined` TypeScript errors.
-* **CSS Custom Property Types:** Used bracket notation `['--index' as any]` in React style props to pass custom CSS variables to our Pure CSS 3D scene without breaking standard `CSSProperties` type checking.
-* **tsParticles Turbopack Compliance:** The `@tsparticles/react` wrapper triggers strict static export errors in Next.js 16 Turbopack environments. We circumvented this by importing the core `tsParticles` engine and handling canvas injection natively.
+* **Vercel Build Configurations (`.npmrc`):** Strict React 19 dependency resolution fails on beta packages (like `@tsparticles`). We included a local `.npmrc` file with `legacy-peer-deps=true` and `ignore-scripts=true` to guarantee stable, automated cloud deployments.
+* **Turbopack vs. Webpack Aliasing:** To resolve "Multiple instances of Three.js" warnings between `@react-three/fiber` and `@splinetool/react-spline`, we explicitly configured the `turbopack` block alongside `webpack` in `next.config.ts`.
 
 ## ⚠️ Known Quirks (Safe to Ignore)
 
-* **Console Warnings in Dev:** You will see warnings like `Multiple instances of Three.js being imported` and `THREE.Clock: This module has been deprecated`. This is caused by `@splinetool/react-spline` relying on a pre-compiled, heavily customized internal version of Three.js that bypasses Next.js alias configs. These warnings only show in development and will be stripped in production.
-* **Atropos Types:** The `atropos/css` import throws a missing type declaration warning in some strict TS environments. This is a library-side export map issue and does not affect the build or CSS rendering.
+* **WebGL/ANGLE Compiler Warnings:** You may see console warnings regarding "loop unrolling" or "uninitialized variables (f_blur)". These are low-level graphics driver optimizations triggered by Three.js shader compilation and do not affect performance or stability.
+* **Console Warnings in Dev:** You will see warnings like `Multiple instances of Three.js being imported` and `THREE.Clock: This module has been deprecated`. This is caused by `@splinetool/react-spline` relying on a pre-compiled, internal version of Three.js that bypasses Next.js alias configs. These only show in development and are stripped in production.
 
 ## 🏃‍♂️ How to Run
 

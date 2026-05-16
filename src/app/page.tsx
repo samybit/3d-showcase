@@ -166,6 +166,7 @@ export default function Home() {
       {/* Phase 8: tsParticles Section (Dark) */}
       <section id="tsparticles" className="relative min-h-screen flex items-center justify-center border-t border-white/10 overflow-hidden bg-black">
         <BackgroundText text="TS PARTICLES" />
+        <ParticlesScene className="absolute inset-0 z-0" />
         <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
           <div className="text-left space-y-6">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">QUANTUM <br /><span className="text-info">CONSTELLATION</span></h2>
@@ -179,7 +180,29 @@ export default function Home() {
             </ul>
           </div>
           <div className="h-[600px] w-full flex items-center justify-center">
-            <ParticlesScene />
+            {/* Re-created the card from the original ParticlesScene, but without the particles inside it. */}
+            <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden rounded-3xl bg-black/20 backdrop-blur-sm border border-white/10 shadow-2xl group">
+              {/* Floating Glassmorphic UI Overlay */}
+              <div className="z-10 flex flex-col items-center gap-6 pointer-events-none transition-transform duration-700 group-hover:scale-105">
+                <div className="w-24 h-24 rounded-2xl bg-black/50 border border-white/20 flex items-center justify-center shadow-lg shadow-info/20 backdrop-blur-md">
+                  <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-info to-secondary">
+                    tsP
+                  </span>
+                </div>
+
+                <div className="text-center space-y-2 backdrop-blur-sm bg-black/20 p-4 rounded-xl border border-white/5">
+                  <h3 className="text-3xl font-bold tracking-tight text-white drop-shadow-md">Particle Engine</h3>
+                  <p className="text-sm text-white/70 max-w-[280px] font-medium">
+                    2D canvas utilizing mathematical parallax and spatial tethering to simulate 3D volume.
+                  </p>
+                </div>
+
+                <div className="flex gap-2">
+                  <div className="badge badge-info badge-outline bg-black/40 backdrop-blur-md font-bold py-3">Parallax Z-Depth</div>
+                  <div className="badge badge-secondary badge-outline bg-black/40 backdrop-blur-md font-bold py-3">Node Tethers</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
